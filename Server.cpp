@@ -46,9 +46,10 @@ void Server::start() {
 
         // Accept a new client connection
         int firstClientSocket = accept(serverSocket, (struct sockaddr *) &firstClientAddress, &firstClientAddressLen);
+        cout << "Client1 connected" << endl;
         int secondClientSocket = accept(serverSocket, (struct sockaddr *) &secondClientAddress,
                                         &secondClientAddressLen);
-        cout << "Client connected" << endl;
+        cout << "Client2 connected" << endl;
         if (firstClientSocket == -1)
             throw "Error on accept";
         if (secondClientSocket == -1)
@@ -60,6 +61,7 @@ void Server::start() {
         } else {
             handleClient(secondClientSocket, firstClientSocket);
         }
+        turn++;
     }
 }
 
