@@ -87,20 +87,35 @@ void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){
 void Server::handleClient(int currentClientSocket,int otherClientSocket) {
 
     //the value of X and Y
-    string thePoint;
+    int thePointX;
+    int thePointY;
 
     //start the reading and writing
     while (true) {
 
-        // Read new point from the player that this his turn
-        int n = read(currentClientSocket, &thePoint, sizeof(thePoint));
+        // Read new x value from the player that this his turn
+        int n = read(currentClientSocket, &thePointX, sizeof(thePointX));
         if (n == -1) {
             cout << "Error reading point" << endl;
             return;
         }
 
-        // Write the result back to the other player
-        n = write(otherClientSocket, &thePoint, sizeof(thePoint));
+        // Read new y value from the player that this his turn
+        n = read(currentClientSocket, &thePointY, sizeof(thePointY));
+        if (n == -1) {
+            cout << "Error reading point" << endl;
+            return;
+        }
+
+        // Write the x value back to the other player
+        n = write(otherClientSocket, &thePointX, sizeof(thePointX));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+            return;
+        }
+
+        // Write the y value back to the other player
+        n = write(otherClientSocket, &thePointY, sizeof(thePointY));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
             return;
