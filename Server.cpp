@@ -112,6 +112,8 @@ void Server::handleClient(int currentClientSocket,int otherClientSocket) {
             return;
         }
 
+        cout << "succes to read point"<< endl;
+
         // Write the x value back to the other player
         n = write(otherClientSocket, &thePointX, sizeof(thePointX));
         if (n == -1) {
@@ -125,6 +127,8 @@ void Server::handleClient(int currentClientSocket,int otherClientSocket) {
             cout << "Error writing to socket" << endl;
             return;
         }
+
+        cout << "succes to write point"<< endl;
     }
 }
 
