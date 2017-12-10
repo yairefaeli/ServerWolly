@@ -60,14 +60,16 @@ void Server::start() {
         }
 
         // Change the turn to the current player
-        if (turn % 2 == 1) {
-            cout << "get to first turn" << endl;
-            handleClient(firstClientSocket, secondClientSocket);
-        } else {
-            cout << "get to second turn" << endl;
-            handleClient(secondClientSocket, firstClientSocket);
+        while(true){
+            if (turn % 2 == 1) {
+                cout << "get to first turn" << endl;
+                handleClient(firstClientSocket, secondClientSocket);
+            } else {
+                cout << "get to second turn" << endl;
+                handleClient(secondClientSocket, firstClientSocket);
+            }
+            turn++;
         }
-        turn++;
     }
 
 }
