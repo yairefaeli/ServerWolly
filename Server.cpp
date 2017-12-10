@@ -55,11 +55,12 @@ void Server::start() {
         if (secondClientSocket == -1)
             throw "Error on accept";
 
-        if(turn == 1){
-            initilaizeTurns(firstClientSocket,secondClientSocket);
+        if (turn == 1) {
+            initilaizeTurns(firstClientSocket, secondClientSocket);
         }
 
         // Change the turn to the current player
+        while (true) {
             if (turn % 2 == 1) {
                 cout << "get to first turn" << endl;
                 handleClient(firstClientSocket, secondClientSocket);
@@ -68,6 +69,8 @@ void Server::start() {
                 handleClient(secondClientSocket, firstClientSocket);
             }
             turn++;
+        }
+
     }
 
 }
