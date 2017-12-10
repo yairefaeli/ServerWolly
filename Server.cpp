@@ -55,6 +55,10 @@ void Server::start() {
         if (secondClientSocket == -1)
             throw "Error on accept";
 
+        if(turn == 1){
+            initilaizeTurns(firstClientSocket,secondClientSocket);
+        }
+
         // Change the turn to the current player
         if (turn % 2 == 1) {
             handleClient(firstClientSocket, secondClientSocket);
@@ -64,7 +68,22 @@ void Server::start() {
         turn++;
     }
 }
-
+void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){
+    int first = 0;
+    int second = 1;
+    // Write for the first player that he plays first
+    int n = write(firstClientSocket, &first, sizeof(int));
+    if (n == -1) {
+        cout << "Error writing who first" << endl;
+        return;
+    }
+    // Write for the second player that he plays second
+    n = write(secondClientSocket, &second, sizeof(int));
+    if (n == -1) {
+        cout << "Error writing who second" << endl;
+        return;
+    }
+}
 void Server::handleClient(int currentClientSocket,int otherClientSocket) {
 
     //the value of X and Y

@@ -18,6 +18,7 @@ private:
     int port;
     int serverSocket; // the socket's file descriptor
     void handleClient(int currentClientSocket,int otherClientSocket);
+    void initilaizeTurns(int firstClientSocket,int secondClientSocket);
 
 };
 
