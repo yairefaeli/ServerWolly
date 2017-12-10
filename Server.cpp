@@ -60,12 +60,14 @@ void Server::start() {
         }
 
         // Change the turn to the current player
-        if (turn % 2 == 1) {
-            handleClient(firstClientSocket, secondClientSocket);
-        } else {
-            handleClient(secondClientSocket, firstClientSocket);
+        while(true) {
+            if (turn % 2 == 1) {
+                handleClient(firstClientSocket, secondClientSocket);
+            } else {
+                handleClient(secondClientSocket, firstClientSocket);
+            }
+            turn++;
         }
-        turn++;
     }
 }
 void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){
