@@ -50,15 +50,14 @@ void Server::start() {
         int secondClientSocket = accept(serverSocket, (struct sockaddr *) &secondClientAddress,
                                         &secondClientAddressLen);
         cout << "Client2 connected" << endl;
-        if (firstClientSocket == -1)
+      /*  if (firstClientSocket == -1)
             throw "Error on accept";
         if (secondClientSocket == -1)
             throw "Error on accept";
-
+            */
         if (turn == 1) {
             initilaizeTurns(firstClientSocket, secondClientSocket);
         }
-
         // Change the turn to the current player
         while (true) {
             if (turn % 2 == 1) {
