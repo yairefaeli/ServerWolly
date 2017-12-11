@@ -5,7 +5,7 @@
 
 using namespace std;
 int main() {
-    std::ifstream file("definitions");
+    std::ifstream file("server_definitions");
     int port;
     file >> port;
     cout<<port<<endl;
