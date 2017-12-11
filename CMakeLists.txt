@@ -3,5 +3,5 @@ project(server)
 
 set(CMAKE_CXX_STANDARD 98)
 
-set(SOURCE_FILES main.cpp Server.cpp Server.h)
+set(SOURCE_FILES src/main.cpp src/Server.cpp include/Server.h)
 add_executable(server ${SOURCE_FILES})

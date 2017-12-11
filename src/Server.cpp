@@ -2,7 +2,7 @@
 // Created by logia on 07/12/17.
 //
 
-#include "Server.h"
+#include "../include/Server.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
