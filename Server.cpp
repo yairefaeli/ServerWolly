@@ -107,6 +107,12 @@ void Server::handleClient(int currentClientSocket,int otherClientSocket) {
         cout << "Error reading point" << endl;
         return;
     }
+
+    //if the game is ends
+    if(thePointX == -1 && thePointY== -1){
+        this -> stop();
+    }
+
     // Write the x value back to the other player
     n = write(otherClientSocket, &thePointX, sizeof(thePointX));
     if (n == -1) {
