@@ -1,9 +1,15 @@
 #include "Server.h"
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
+
 using namespace std;
 int main() {
-    Server server(8758);
+    std::ifstream file("definitions");
+    int port;
+    file >> port;
+
+    Server server(port);
     try {
         server.start();
     } catch (const char *msg) {
