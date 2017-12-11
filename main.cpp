@@ -8,6 +8,7 @@ int main() {
     std::ifstream file("definitions");
     int port;
     file >> port;
+    cout<<port<<endl;
 
     Server server(port);
     try {
