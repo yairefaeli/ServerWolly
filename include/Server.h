@@ -6,12 +6,14 @@
 #define SERVER_SERVER_H
 
 
+#include <string>
+
 class Server {
 public:
     Server(int port);
 
     void start();
-
+    void handleRequest(string str);
     void stop();
 
 private:

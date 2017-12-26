@@ -71,6 +71,11 @@ void Server::start() {
     }
 
 }
+
+void Server::handleRequest(string str){
+
+}
+
 void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){
     int first = 0;
     int second = 1;
