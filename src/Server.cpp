@@ -9,6 +9,7 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
+#include <vector>
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 Server::Server(int port): port(port), serverSocket(0) {
@@ -72,7 +73,18 @@ void Server::start() {
 
 }
 
-void Server::handleRequest(string str){
+void Server::handleRequest(char* str){
+
+    char delim=' ';
+    char* toDelim=&delim;
+    vector<string> command;
+           command.push_back(strtok(str,toDelim));
+    command.push_back(strtok(NULL,toDelim));
+
+
+
+
+
 
 }
 
