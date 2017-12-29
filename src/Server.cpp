@@ -3,6 +3,9 @@
 //
 
 #include "../include/Server.h"
+#include "../include/Task.h"
+#include "../include/ThreadPool.h"
+#include "../include/threadFor2Clients.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -33,59 +36,47 @@ void Server::start() {
         throw "Error on binding";
     }
 
-    // Start listening to incoming connections
+    // threadFor2Clients listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
     // Define the client socket's structures
     struct sockaddr_in firstClientAddress, secondClientAddress;
     socklen_t firstClientAddressLen, secondClientAddressLen;
     //Define the turns
-    int turn = 1;
-
+    int turn = 0;
+    ThreadPool tp=ThreadPool(50);
     while (true) {
+
         cout << "Waiting for client connections..." << endl;
 
         // Accept a new client connection
         int firstClientSocket = accept(serverSocket, (struct sockaddr *) &firstClientAddress, &firstClientAddressLen);
         cout << "Client1 connected" << endl;
-        int secondClientSocket = accept(serverSocket, (struct sockaddr *) &secondClientAddress,
-                                        &secondClientAddressLen);
-        cout << "Client2 connected" << endl;
-      /*  if (firstClientSocket == -1)
+        if (firstClientSocket == -1)
             throw "Error on accept";
-        if (secondClientSocket == -1)
-            throw "Error on accept";
-            */
-        if (turn == 1) {
-            initilaizeTurns(firstClientSocket, secondClientSocket);
-        }
-        // Change the turn to the current player
-        while (true) {
-            if (turn % 2 == 1) {
-                handleClient(firstClientSocket, secondClientSocket);
-            } else {
-                handleClient(secondClientSocket, firstClientSocket);
-            }
-            turn++;
-        }
+        //reading the command of the player
+        string str;
+        int n = read(firstClientSocket, &str, sizeof(str));
+        char delim=' ';
+        char* toDelim=&delim;
+        vector<string> command;
+        command.push_back(strtok((char *)&str,toDelim));
+        command.push_back(strtok(NULL,toDelim));
+        cmdm.executeCommand(*command.at(0),command);
 
-    }
+        Task* t=(Task*)new threadFor2Clients(firstClientSocket,turn,map);
+        tp.addTask(t);
+
 
 }
 
 void Server::handleRequest(char* str){
-
     char delim=' ';
     char* toDelim=&delim;
     vector<string> command;
            command.push_back(strtok(str,toDelim));
     command.push_back(strtok(NULL,toDelim));
-
-
-
-
-
-
+    cout << command.at(0)<<" "<<command.at(1);
 }
 
 void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){

@@ -6,12 +6,10 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-CommandsManager::CommandsManager() {
-    commandsMap["start"] = new PrintCommand();
-    commandsMap["list_games"] = new PrintCommand();
-    commandsMap["join"] = new PrintCommand();
-    commandsMap["play"] = new PrintCommand();
-    commandsMap["close"] = new PrintCommand();
+CommandsManager::CommandsManager(map<string,Task*>* threadMap) {
+    this->threadMap=threadMap;
+    commandsMap["start"] = new StartCommand(threadMap);
+
 }
 void CommandsManager::executeCommand(string command, vector<string> args){
     Command *commandObj = commandsMap[command];
