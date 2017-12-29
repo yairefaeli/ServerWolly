@@ -19,6 +19,8 @@ public:
     threadFor2Clients(int firstClientSocket,int turn,map<string,Command*> cmdMap);
     void handleClient(int currentClientSocket,int otherClientSocket);
     void join(int secondClientSocket);
+    bool available();
+
     private:
     int firstClientSocket;
     int secondClientSocket;

@@ -16,6 +16,7 @@ threadFor2Clients::threadFor2Clients(int firstClientSocket,int turn,map<string,C
     this->firstClientSocket=firstClientSocket;
     this->turn=turn;
     this->cmdMap=cmdMap;
+    this->secondClientSocket=0;
 }
 
 virtual ~Task() {}
@@ -36,6 +37,13 @@ virtual void showTask(){
 
 void threadFor2Clients::join(int secondClientSocket){
     this->secondClientSocket=secondClientSocket;
+}
+
+bool threadFor2Clients::available() {
+    if(secondClientSocket!=0){
+        return false;
+    }
+    return true;
 }
 
 
