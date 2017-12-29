@@ -11,7 +11,7 @@
 
 class CommandsManager {
 public:
-    CommandsManager(map<string,Task*>* threadMap);
+    CommandsManager(map<string,Task*>* threadMap,int firstClientSocket);
     ~CommandsManager();
     void executeCommand(string command,vector<string> args);
 private:

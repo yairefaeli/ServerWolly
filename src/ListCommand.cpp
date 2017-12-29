@@ -3,7 +3,7 @@
 //
 
 #include "../include/ListCommand.h"
-
+#include <map>
 
 
 
@@ -11,7 +11,8 @@
 
 string ListCommand::execute(vector<string> args){
 
-    for (map<string,Task>::iterator it=threadMap.begin(); it != threadMap.end(); ++it) {
-        threadMap.
+    for (map<string,Task*>::iterator auto it=threadMap->begin(); it != threadMap->end(); it++) {
+        
+        cout <<it <<endl;
     }
 }

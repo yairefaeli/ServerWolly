@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-CommandsManager::CommandsManager(map<string,Task*>* threadMap) {
+CommandsManager::CommandsManager(map<string,Task*>* threadMap, int firstClientSocket) {
     this->threadMap=threadMap;
     commandsMap["start"] = new StartCommand(threadMap);
 
