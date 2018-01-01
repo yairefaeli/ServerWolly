@@ -56,19 +56,6 @@ void Server::start() {
             throw "Error on accept";
 
         //reading the command of the player
-        string str;
-        int n = read(firstClientSocket, &str, sizeof(str));
-        char delim=' ';
-        char* toDelim=&delim;
-        vector<string> command;
-        command.push_back(strtok((char *)&str,toDelim));
-        command.push_back(strtok(NULL,toDelim));
-
-
-        cmdm.executeCommand(*command.at(0),command);
-
-        Task* t=(Task*)new threadFor2Clients(firstClientSocket,turn,map);
-        tp.addTask(t);
 
 
 }

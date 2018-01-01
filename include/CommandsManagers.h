@@ -11,12 +11,14 @@
 
 class CommandsManager {
 public:
-    CommandsManager(map<string,Task*>* threadMap,int firstClientSocket);
+    CommandsManager();
+    CommandsManager(map<string,Task*>* threadMap, int firstClientSocket);
     ~CommandsManager();
     void executeCommand(string command,vector<string> args);
 private:
     map<string,Command *> commandsMap;
     map<string,Task*>* threadMap;
+    int clientSocket;
 };
 
 

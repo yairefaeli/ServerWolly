@@ -8,6 +8,7 @@
 #include <string.h>
 #include "Command.h"
 #include "Task.h"
+#include "ThreadPool.h"
 
 
 /*
@@ -19,7 +20,7 @@ using namespace std;
 
  public:
      //Constructor
-     startCommand(map<string, Task*>* threadMap);
+     startCommand(map<string, Task*>* threadMap,int* firstClientSocket,ThreadPool* tp);
 
      //the command execute
      string execute(vector<string> args);
@@ -29,6 +30,8 @@ using namespace std;
 
  private:
      map<string, Task *> *mapOfThread;
+     int* firstClientSocket;
+     ThreadPool* tp;
  };
 
 
