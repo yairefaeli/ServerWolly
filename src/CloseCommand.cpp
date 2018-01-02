@@ -14,4 +14,4 @@ CloseCommand::CloseCommand(map<string, Task*>* threadMap,int firstClientSocket,T
     this->firstClientSocket = firstClientSocket;
     this->tp = tp;
 
-} 
+}
