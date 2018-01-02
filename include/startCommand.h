@@ -20,12 +20,12 @@ using namespace std;
 
  public:
      //Constructor
-     startCommand(map<string, Task*>* threadMap,int firstClientSocket,ThreadPool tp);
+     startCommand(map<string, Task *> *threadMap, int firstClientSocket, ThreadPool tp);
 
      //the command execute
      string execute(vector<string> args);
 
-     //
+     // destructor
      ~Command() {}
 
  private:
