@@ -12,7 +12,7 @@
 
 class WaitingRoom :Task {
 public:
-    WaitingRoom(map<string,Task*> threadMap,CommandsManager cmdm , int clientSocket, ThreadPool tp);
+    WaitingRoom(map<string,Task*>* threadMap, int clientSocket, ThreadPool tp);
 
 
 
@@ -21,7 +21,7 @@ public:
      void showTask()=0;
 
 private:
-    map<string,Task*> threadMap;
+    map<string,Task*>* threadMap;
     CommandsManager cmdm=CommandsManager();
     int clientSocket;
     ThreadPool tp=0;

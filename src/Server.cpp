@@ -6,6 +6,7 @@
 #include "../include/Task.h"
 #include "../include/ThreadPool.h"
 #include "../include/threadFor2Clients.h"
+#include "../include/WaitingRoom.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -45,6 +46,7 @@ void Server::start() {
     //Define the turns
     int turn = 0;
     ThreadPool tp=ThreadPool(50);
+    map<string,Task*> threadMap;
     while (true) {
 
         cout << "Waiting for client connections..." << endl;
@@ -54,6 +56,9 @@ void Server::start() {
         cout << "Client1 connected" << endl;
         if (firstClientSocket == -1)
             throw "Error on accept";
+
+        Task* t=(Task*)new WaitingRoom(&threadMap,firstClientSocket,tp);
+        tp.addTask(t);
 
         //reading the command of the player
 

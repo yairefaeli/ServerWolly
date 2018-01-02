@@ -13,7 +13,8 @@
 class Task {
 public:
     Task() {}
-    virtual ~Task() {}
+    virtual ~Task() {};
+   virtual  void join(int secondClientSocket);
     virtual void run()=0;
     virtual void showTask()=0;
 };
