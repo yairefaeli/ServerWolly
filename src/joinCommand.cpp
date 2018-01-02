@@ -2,7 +2,7 @@
 // Created by or on 01/01/18.
 //
 
-#include "joinCommand.h"
+#include "../include/joinCommand.h"
 #include <string.h>
 joinCommand::joinCommand(map<string, Task *>* threadMap,int firstClientSocket) {
     this->threadMap=threadMap;

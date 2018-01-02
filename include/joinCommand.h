@@ -7,8 +7,8 @@
 
 
 #include <map>
-#include "include/Command.h"
-#include "include/Task.h"
+#include "Command.h"
+#include "Task.h"
 
 using namespace std;
 
