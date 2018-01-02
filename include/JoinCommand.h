@@ -1,5 +1,5 @@
 //
-// Created by or on 01/01/18.
+// Created by or on 02/01/18.
 //
 
 #ifndef SERVER_JOINCOMMAND_H
@@ -23,5 +23,6 @@ private:
     map<string,Task*>* threadMap;
     int firstClientSocket;
 };
+
 
 #endif //SERVER_JOINCOMMAND_H

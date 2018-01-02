@@ -1,11 +1,12 @@
 //
-// Created by or on 01/01/18.
+// Created by or on 02/01/18.
 //
 
-#include "../include/joinCommand.h"
+#include "../include/JoinCommand.h"
+
 #include <string.h>
 joinCommand::joinCommand(map<string, Task *>* threadMap,int firstClientSocket) {
-    this->threadMap=threadMap;
+this->threadMap=threadMap;
 }
 
 string joinCommand::execute(vector<string> args) {
