@@ -4,6 +4,9 @@
 
 #include "../include/CommandsManagers.h"
 #include "../include/startCommand.h"
+#include "../include/CloseCommand.h"
+#include "../include/JoinCommand.h"
+#include "../include/ListCommand.h"
 
 // declariton on help function
 
@@ -49,11 +52,10 @@ void CommandsManager::addThreadPool(ThreadPool tp) {
 map<string, Command *> CommandsManager :: initializeMap(){
     map<string, Command *> commandsMap;
 
-    commandsMap["start"] =(Command*) new startCommand(this->threadMap,this->clientSocket, this->tp);
-
-    //commandsMap["join"] = ;
+    commandsMap["start"] = (Command*) new startCommand(this->threadMap,this->clientSocket, this->tp);
+    commandsMap["close"] = (Command*) new CloseCommand(this->threadMap,this->clientSocket, this->tp);
+    commandsMap["join"] = (Command*) new joinCommand(this->threadMap,this->clientSocket);
     //commandsMap["play"] = ;
-    //commandsMap["close"] = ;
-    //commandsMap["list_games"] = ;
+    commandsMap["list_games"] = (Command*) new ListCommand(this->threadMap);
     return commandsMap;
 }

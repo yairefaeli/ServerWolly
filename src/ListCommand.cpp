@@ -2,17 +2,22 @@
 // Created by or on 29/12/17.
 //
 
+#include <sstream>
 #include "../include/ListCommand.h"
-#include <map>
 
 
 
-
+ListCommand::ListCommand(map<string, Task *> *threadMap) {
+    this->threadMap = threadMap;
+}
 
 string ListCommand::execute(vector<string> args){
 
-    for (map<string,Task*>::iterator auto it=threadMap->begin(); it != threadMap->end(); it++) {
-        
-        cout <<it <<endl;
+    this->threadMap;
+    string listOfGames = "";
+    for (map<string,int>::iterator auto it = this->threadMap->begin(); it != this->threadMap->end(); it++) {
+        listOfGames += it->first + " ";
     }
+    return listOfGames;
+
 }
