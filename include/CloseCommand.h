@@ -16,18 +16,18 @@ using namespace std;
 class CloseCommand : Command {
 public:
     //Constructor
-    CloseCommand(map<string, Task *> *threadMap, int firstClientSocket, ThreadPool tp);
+    CloseCommand(map<string, Task *> *threadMap, int firstClientSocket, ThreadPool* tp);
 
     //the command execute
     string execute(vector<string> args);
 
     // destructor
-    ~Command() {}
+    //~Command() {}
 
 private:
     map<string, Task *> *mapOfThreads;
     int firstClientSocket;
-    ThreadPool tp = 0;
+    ThreadPool *tp;
 };
 
 

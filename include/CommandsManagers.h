@@ -14,7 +14,7 @@ class CommandsManager {
 public:
     CommandsManager();
 
-    CommandsManager(map<string, Task *> *threadMap, int theClientSocket, ThreadPool tp);
+    CommandsManager(map<string, Task *> *threadMap, int theClientSocket, ThreadPool *tp);
 
     ~CommandsManager();
 
@@ -24,14 +24,14 @@ public:
 
     void addClientSocket(int clientSocket);
 
-    void addThreadPool(ThreadPool tp);
+    void addThreadPool(ThreadPool *tp);
 
     map<string, Command *> initializeMap();
 private:
     map<string, Command *> commandsMap;
     map<string, Task *> *threadMap;
     int clientSocket;
-    ThreadPool tp = 0;
+    ThreadPool *tp;
 };
 
 

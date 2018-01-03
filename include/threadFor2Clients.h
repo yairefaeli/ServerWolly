@@ -11,24 +11,37 @@
 #include <map>
 #include "Command.h"
 #include "Task.h"
+#include "ThreadPool.h"
+#include "CommandsManagers.h"
 
 using namespace std;
 
-class threadFor2Clients : Task{
+class threadFor2Clients : Task {
 public:
-    threadFor2Clients(int firstClientSocket,int turn,map<string,Command*> cmdMap);
-    void handleClient(int currentClientSocket,int otherClientSocket);
+    threadFor2Clients(int firstClientSocket, int turn, ThreadPool* tp,
+                      map<string, Task *> *threadMap);
+
+    void handleClient(int currentClientSocket, int otherClientSocket);
+
     void join(int secondClientSocket);
+
+    void run();
+
+    void showTask(){};
     bool available();
 
-    private:
+private:
     int firstClientSocket;
     int secondClientSocket;
     int turn;
-    map<string,Command*> cmdMap;
-     ~Task() {}
-    void run();
-    void showTask();
+    CommandsManager cmdm = CommandsManager();
+
+    ThreadPool *tp;
+    map<string, Task *> *threadMap;
+
+
+    //~Task() {}
+
 };
 
 

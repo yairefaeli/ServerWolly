@@ -9,22 +9,27 @@
 #include "Task.h"
 #include "CommandsManagers.h"
 #include "ThreadPool.h"
-
-class WaitingRoom :Task {
+using namespace std;
+class WaitingRoom :public Task {
 public:
-    WaitingRoom(map<string,Task*>* threadMap, int clientSocket, ThreadPool tp);
+    WaitingRoom(map<string, Task *> *threadMap, int clientSocket, ThreadPool *tp);
 
 
+    ~WaitingRoom() {};
 
 
-     void run()=0;
-     void showTask()=0;
+    void showTask(){};
+
+    void join(int secondClientSocket){};
+
+    void run();
+
 
 private:
-    map<string,Task*>* threadMap;
-    CommandsManager cmdm=CommandsManager();
+    map<string, Task *> *threadMap;
+    CommandsManager cmdm = CommandsManager();
     int clientSocket;
-    ThreadPool tp=0;
+    ThreadPool *tp;
 
 };
 #endif //SERVER_WAITINGROOM_H

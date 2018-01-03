@@ -20,8 +20,8 @@ public:
     void handleRequest(char* str);
 private:
     int port;
-    map<string,Task> mapTasks;
-    CommandsManager cmdm=CommandsManager(mapTasks);
+
+    //CommandsManager cmdm=CommandsManager(mapTasks);
     int serverSocket; // the socket's file descriptor
     void handleClient(int currentClientSocket,int otherClientSocket);
     void initilaizeTurns(int firstClientSocket,int secondClientSocket);

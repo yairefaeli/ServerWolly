@@ -16,8 +16,8 @@ class joinCommand : Command {
 public:
     joinCommand(map<string,Task*>* threadMap,int firstClientSocket);
 
-    string execute(vector<string> args) = 0;
-    virtual ~Command(){}
+    string execute(vector<string> args) ;
+    //virtual ~Command(){}
 
 private:
     map<string,Task*>* threadMap;

@@ -11,6 +11,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <iostream>
 #include "Thread.h"
 #include "WorkQueue.h"
 #include "Task.h"
@@ -18,6 +19,7 @@
 
 // Thanks to the reusable thread class implementing threads is
 // simple and free of pthread api usage.
+using namespace std;
 class PoolWorkerThread : public Thread
 {
 public:

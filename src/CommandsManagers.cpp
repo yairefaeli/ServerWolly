@@ -16,10 +16,9 @@ CommandsManager::CommandsManager(){
     this->tp = 0;
     this->threadMap = 0;
     this->clientSocket = 0;
-    this->commandsMap = initializeMap();
 }
 
-CommandsManager::CommandsManager(map<string, Task *> *threadMap, int theClientSocket, ThreadPool tp) {
+CommandsManager::CommandsManager(map<string, Task *> *threadMap, int theClientSocket, ThreadPool *tp) {
     this->threadMap = threadMap;
     this->tp = tp;
     this->clientSocket = theClientSocket;
@@ -45,7 +44,7 @@ void CommandsManager::addThreadMap(map<string, Task *> *threadMap) {
     this->threadMap = threadMap;
 }
 
-void CommandsManager::addThreadPool(ThreadPool tp) {
+void CommandsManager::addThreadPool(ThreadPool *tp) {
     this->tp = tp;
 }
 
@@ -57,5 +56,6 @@ map<string, Command *> CommandsManager :: initializeMap(){
     commandsMap["join"] = (Command*) new joinCommand(this->threadMap,this->clientSocket);
     //commandsMap["play"] = ;
     commandsMap["list_games"] = (Command*) new ListCommand(this->threadMap);
+    this->commandsMap = commandsMap;
     return commandsMap;
 }

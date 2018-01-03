@@ -20,18 +20,18 @@ using namespace std;
 
  public:
      //Constructor
-     startCommand(map<string, Task *> *threadMap, int firstClientSocket, ThreadPool tp);
+     startCommand(map<string, Task *> *threadMap, int firstClientSocket, ThreadPool* tp);
 
      //the command execute
      string execute(vector<string> args);
 
      // destructor
-     ~Command() {}
+    // ~Command() {}
 
  private:
      map<string, Task *> *mapOfThreads;
      int firstClientSocket;
-     ThreadPool tp = 0;
+     ThreadPool *tp;
  };
 
 

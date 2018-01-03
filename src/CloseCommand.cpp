@@ -8,7 +8,7 @@ string CloseCommand :: execute(vector<string> args){
     this->mapOfThreads->erase(args[1]);
 }
 
-CloseCommand::CloseCommand(map<string, Task*>* threadMap,int firstClientSocket,ThreadPool tp) {
+CloseCommand::CloseCommand(map<string, Task*>* threadMap,int firstClientSocket,ThreadPool *tp) {
 
     mapOfThreads = threadMap;
     this->firstClientSocket = firstClientSocket;

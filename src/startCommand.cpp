@@ -6,19 +6,18 @@
 #include "../include/threadFor2Clients.h"
 
 
-string startCommand :: execute(vector<string> args) {
-
-    Task *t = (Task *) new threadFor2Clients(this->firstClientSocket, 0, this->& mapOfThreads);
-    this->tp.addTask(t);
-
-    mapOfThreads->insert(std::pair<string, Task *>(args[1], t));
-
-}
-
-startCommand::startCommand(map<string, Task*>* threadMap,int firstClientSocket,ThreadPool tp) {
+startCommand::startCommand(map<string, Task*>* threadMap,int firstClientSocket,ThreadPool* tp) {
 
     mapOfThreads = threadMap;
     this->firstClientSocket = firstClientSocket;
     this->tp = tp;
+
+}
+
+string startCommand :: execute(vector<string> args) {
+
+    Task *t = (Task *) new threadFor2Clients(this->firstClientSocket, 0,tp ,mapOfThreads);
+    //(*(this->mapOfThreads))[args[1]] =  t;
+    this->tp->addTask(t);
 
 }

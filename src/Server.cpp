@@ -45,8 +45,8 @@ void Server::start() {
     socklen_t firstClientAddressLen, secondClientAddressLen;
     //Define the turns
     int turn = 0;
-    ThreadPool tp=ThreadPool(50);
-    map<string,Task*> threadMap;
+    ThreadPool tp = ThreadPool(50);
+    map<string, Task *> threadMap;
     while (true) {
 
         cout << "Waiting for client connections..." << endl;
@@ -57,14 +57,17 @@ void Server::start() {
         if (firstClientSocket == -1)
             throw "Error on accept";
 
-        Task* t=(Task*)new WaitingRoom(&threadMap,firstClientSocket,tp);
+        Task *t ;
+        t=new WaitingRoom(&threadMap, firstClientSocket, &tp);
+        cout<<"mip";
         tp.addTask(t);
+
 
         //reading the command of the player
 
 
-}
-
+    }
+/*
 void Server::handleRequest(char* str){
     char delim=' ';
     char* toDelim=&delim;
@@ -126,8 +129,11 @@ void Server::handleClient(int currentClientSocket,int otherClientSocket) {
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         return;
+
     }
+*/
 }
+
 
 void Server::stop() {
     close(serverSocket);

@@ -15,7 +15,7 @@ string ListCommand::execute(vector<string> args){
 
     this->threadMap;
     string listOfGames = "";
-    for (map<string,int>::iterator auto it = this->threadMap->begin(); it != this->threadMap->end(); it++) {
+    for (map<string,Task*>::iterator auto it = this->threadMap->begin(); it != this->threadMap->end(); it++) {
         listOfGames += it->first + " ";
     }
     return listOfGames;

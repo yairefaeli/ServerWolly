@@ -18,7 +18,7 @@ class ListCommand : Command {
 public:
     ListCommand(map<string,Task*>* threadMap);
     string execute(vector<string> args);
-    virtual ~Command(){}
+    //virtual ~Command(){}
 
 private:
     map<string,Task*>* threadMap;

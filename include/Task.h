@@ -12,9 +12,9 @@
 // showTask() is for debugging and can be deleted if not used
 class Task {
 public:
-    Task() {}
-    virtual ~Task() {};
-   virtual  void join(int secondClientSocket);
+    Task(){};
+    virtual ~Task();
+    virtual  void join(int secondClientSocket){};
     virtual void run()=0;
     virtual void showTask()=0;
 };
