@@ -7,12 +7,14 @@
 #include "../include/CloseCommand.h"
 #include "../include/JoinCommand.h"
 #include "../include/ListCommand.h"
+#include "../include/playCommand.h"
 
 // declariton on help function
 
 
 // application of the class CommandManager
 CommandsManager::CommandsManager(){
+
     this->tp = 0;
     this->threadMap = 0;
     this->clientSocket = 0;
@@ -22,12 +24,13 @@ CommandsManager::CommandsManager(map<string, Task *> *threadMap, int theClientSo
     this->threadMap = threadMap;
     this->tp = tp;
     this->clientSocket = theClientSocket;
-    this->commandsMap = initializeMap();
+    initializeMap();
 }
 
 void CommandsManager::executeCommand(string command, vector<string> args) {
     Command *commandObj = commandsMap[command];
     commandObj->execute(args);
+
 }
 
 CommandsManager::~CommandsManager() {
@@ -44,18 +47,20 @@ void CommandsManager::addThreadMap(map<string, Task *> *threadMap) {
     this->threadMap = threadMap;
 }
 
+void CommandsManager::addPlayCommand(int fsocket,int ssocket) {
+
+    commandsMap["play"]=(Command*)new playCommand(fsocket,ssocket);
+}
+
 void CommandsManager::addThreadPool(ThreadPool *tp) {
     this->tp = tp;
 }
 
-map<string, Command *> CommandsManager :: initializeMap(){
+void CommandsManager :: initializeMap() {
     map<string, Command *> commandsMap;
-
-    commandsMap["start"] = (Command*) new startCommand(this->threadMap,this->clientSocket, this->tp);
-    commandsMap["close"] = (Command*) new CloseCommand(this->threadMap,this->clientSocket, this->tp);
-    commandsMap["join"] = (Command*) new joinCommand(this->threadMap,this->clientSocket);
-    //commandsMap["play"] = ;
-    commandsMap["list_games"] = (Command*) new ListCommand(this->threadMap);
+    commandsMap["start"] = (Command *) new startCommand(this->threadMap, this->clientSocket, this->tp);
+    commandsMap["close"] = (Command *) new CloseCommand(this->threadMap, this->clientSocket, this->tp);
+    commandsMap["join"] = (Command *) new joinCommand(this->threadMap, this->clientSocket);
+    commandsMap["list_games"] = (Command *) new ListCommand(this->threadMap, this->clientSocket);
     this->commandsMap = commandsMap;
-    return commandsMap;
 }

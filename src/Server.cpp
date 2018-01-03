@@ -27,6 +27,12 @@ void Server::start() {
         throw "Error opening socket";
     }
 
+    int enable=1;
+    if(setsockopt(serverSocket,SOL_SOCKET,SO_REUSEADDR,&enable,sizeof(int))<0){
+        perror("failed");
+    }
+
+
     // Assign a local address to the socket
     struct sockaddr_in serverAddress;
     bzero((void *) &serverAddress, sizeof(serverAddress));
@@ -53,85 +59,18 @@ void Server::start() {
 
         // Accept a new client connection
         int firstClientSocket = accept(serverSocket, (struct sockaddr *) &firstClientAddress, &firstClientAddressLen);
-        cout << "Client1 connected" << endl;
+        cout << "Client connected" << endl;
         if (firstClientSocket == -1)
             throw "Error on accept";
 
         Task *t ;
         t=new WaitingRoom(&threadMap, firstClientSocket, &tp);
-        cout<<"mip";
         tp.addTask(t);
 
 
         //reading the command of the player
 
-
-    }
-/*
-void Server::handleRequest(char* str){
-    char delim=' ';
-    char* toDelim=&delim;
-    vector<string> command;
-           command.push_back(strtok(str,toDelim));
-    command.push_back(strtok(NULL,toDelim));
-    cout << command.at(0)<<" "<<command.at(1);
-}
-
-void Server::initilaizeTurns(int firstClientSocket,int secondClientSocket){
-    int first = 0;
-    int second = 1;
-    // Write for the first player that he plays first
-    int n = write(firstClientSocket, &first, sizeof(int));
-    if (n == -1) {
-        cout << "Error writing who first" << endl;
-        return;
-    }
-    // Write for the second player that he plays second
-    n = write(secondClientSocket, &second, sizeof(int));
-    if (n == -1) {
-        cout << "Error writing who second" << endl;
-        return;
-    }
-}
-void Server::handleClient(int currentClientSocket,int otherClientSocket) {
-
-    //the value of X and Y
-    int thePointX;
-    int thePointY;
-
-    //start the reading and writing
-    // Read new x value from the player that this his turn
-    int n = read(currentClientSocket, &thePointX, sizeof(thePointX));
-    if (n == -1) {
-        cout << "Error reading point" << endl;
-        return;
-    }
-    // Read new y value from the player that this his turn
-    n = read(currentClientSocket, &thePointY, sizeof(thePointY));
-    if (n == -1) {
-        cout << "Error reading point" << endl;
-        return;
-    }
-
-    //if the game is ends
-    if(thePointX == -1 && thePointY== -1){
-        this -> stop();
-    }
-
-    // Write the x value back to the other player
-    n = write(otherClientSocket, &thePointX, sizeof(thePointX));
-    if (n == -1) {
-        cout << "Error writing to socket" << endl;
-        return;
-    }
-    // Write the y value back to the other player
-    n = write(otherClientSocket, &thePointY, sizeof(thePointY));
-    if (n == -1) {
-        cout << "Error writing to socket" << endl;
-        return;
-
-    }
-*/
+  }
 }
 
 

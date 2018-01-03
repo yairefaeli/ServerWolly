@@ -16,8 +16,8 @@ startCommand::startCommand(map<string, Task*>* threadMap,int firstClientSocket,T
 
 string startCommand :: execute(vector<string> args) {
 
-    Task *t = (Task *) new threadFor2Clients(this->firstClientSocket, 0,tp ,mapOfThreads);
-    //(*(this->mapOfThreads))[args[1]] =  t;
-    this->tp->addTask(t);
-
+    Task *task=new threadFor2Clients(this->firstClientSocket, 0,tp ,mapOfThreads);
+    (*(this->mapOfThreads))[args[1]] =task  ;
+    (*tp).addTask(task);
+    return "s";
 }

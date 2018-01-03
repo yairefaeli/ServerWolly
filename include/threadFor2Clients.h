@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class threadFor2Clients : Task {
+class threadFor2Clients : public Task {
 public:
     threadFor2Clients(int firstClientSocket, int turn, ThreadPool* tp,
                       map<string, Task *> *threadMap);

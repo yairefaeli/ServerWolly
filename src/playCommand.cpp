@@ -3,14 +3,14 @@
 //
 
 
-#include "playCommand.h"
+#include "../include/playCommand.h"
 #include <pthread.h>
 #include <cstdlib>
 #include <unistd.h>
 #include <map>
 #include <cstring>
 #include <iostream>
-
+#define SIZEOF 2000
 
 playCommand::playCommand(int fSocket, int sSocket) {
     this->fSocket=fSocket;
@@ -19,18 +19,23 @@ playCommand::playCommand(int fSocket, int sSocket) {
 }
 
 string playCommand::execute(vector<string> args) {
-    string s=args.at(1)+" "+args.at(2);
+    char s[SIZEOF];
+    strcpy(s,args.at(1).c_str());
+    strcat(s," ");
+    strcat(s,args.at(2).c_str());
     if(turn%2==0){
-        int n = write(sSocket, &s, sizeof(s));
+        long n = write(sSocket, s, SIZEOF);
         if (n == -1) {
             cout << "Error witing point" << endl;
         }
     }
     else{
-        int n = write(fSocket, &s, sizeof(s));
+        long n = write(fSocket, s, SIZEOF);
         if (n == -1) {
             cout << "Error witing point" << endl;
         }
     }
     turn++;
+    return "s";
 }
+

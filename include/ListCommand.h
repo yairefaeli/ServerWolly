@@ -16,11 +16,12 @@ using namespace std;
 
 class ListCommand : Command {
 public:
-    ListCommand(map<string,Task*>* threadMap);
+    ListCommand(map<string,Task*>* threadMap, int clientSocket);
     string execute(vector<string> args);
     //virtual ~Command(){}
 
 private:
     map<string,Task*>* threadMap;
+    int clientSocket;
 };
 #endif //SERVER_LISTCOMMAND_H

@@ -20,13 +20,14 @@ public:
 
     void executeCommand(string command, vector<string> args);
 
+    void addPlayCommand(int fsocket,int ssocket);
     void addThreadMap(map<string, Task *> *threadMap);
 
     void addClientSocket(int clientSocket);
 
     void addThreadPool(ThreadPool *tp);
 
-    map<string, Command *> initializeMap();
+    void initializeMap();
 private:
     map<string, Command *> commandsMap;
     map<string, Task *> *threadMap;
