@@ -14,7 +14,7 @@
 class Server {
 public:
     Server(int port);
-
+    void getPool(ThreadPool *tp);
     void start();
     void stop();
     void handleRequest(char* str);
@@ -25,7 +25,7 @@ private:
     int serverSocket; // the socket's file descriptor
     void handleClient(int currentClientSocket,int otherClientSocket);
     void initilaizeTurns(int firstClientSocket,int secondClientSocket);
-
+    ThreadPool *tp;
 };
 
 

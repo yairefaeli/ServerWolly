@@ -19,6 +19,9 @@ using namespace std;
 Server::Server(int port): port(port), serverSocket(0) {
     cout << "Server" << endl;
 }
+void Server::getPool(ThreadPool *tp){
+    this->tp=tp;
+}
 void Server::start() {
 
     // Create a socket point
@@ -27,8 +30,8 @@ void Server::start() {
         throw "Error opening socket";
     }
 
-    int enable=1;
-    if(setsockopt(serverSocket,SOL_SOCKET,SO_REUSEADDR,&enable,sizeof(int))<0){
+    int enable = 1;
+    if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0) {
         perror("failed");
     }
 
@@ -51,8 +54,8 @@ void Server::start() {
     socklen_t firstClientAddressLen, secondClientAddressLen;
     //Define the turns
     int turn = 0;
-    ThreadPool tp = ThreadPool(50);
     map<string, Task *> threadMap;
+
     while (true) {
 
         cout << "Waiting for client connections..." << endl;
@@ -64,8 +67,8 @@ void Server::start() {
             throw "Error on accept";
 
         Task *t ;
-        t=new WaitingRoom(&threadMap, firstClientSocket, &tp);
-        tp.addTask(t);
+        t=new WaitingRoom(&threadMap, firstClientSocket, this->tp);
+        (*tp).addTask(t);
 
 
         //reading the command of the player
