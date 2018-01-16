@@ -5,8 +5,8 @@
 #ifndef SERVER_ACCEPTINGCLIENTS_H
 #define SERVER_ACCEPTINGCLIENTS_H
 
-#include "include/Task.h"
-#include "include/Server.h"
+#include "Task.h"
+#include "Server.h"
 
 class acceptingClients : public Task{
 public:
