@@ -5,6 +5,18 @@
 #include <fstream>
 #include <string.h>
 using namespace std;
+
+
+
+typedef struct couple{
+    int firstClientSocket;
+    int secondClientSocket;
+    couple* next;
+};
+
+
+
+
 int main() {
 
 
@@ -13,10 +25,14 @@ int main() {
     file >> port;
 
 
-    ThreadPool tp = ThreadPool(50);
+    ThreadPool tp = ThreadPool(5);
     Server server(port);
+
+
+
+
     server.getPool(&tp);
-    Task *s = (Task *) new acceptingClients(server, &tp);
+    Task *s = (Task *) new acceptingClients(server, &tp,);
     tp.addTask(s);
     string c = "x";
     while (c.compare("exit") != 0) {
